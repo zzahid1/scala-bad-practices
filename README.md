@@ -9,13 +9,13 @@ This project references bad practices in Scala, some a language specific and som
 - use throw or null, even if they are inherited from a library (a Java one for example)
 - Any: when returned by a lib, cast/type (pattern matching) it asap
 - overuse of implicit: implicit conversions, too common types
-- redefine common operators (->)
+- redefine common operators (->) (we lose the advantage of local reasoning)
 - apply method that return an other type than it's object
 - threadlocal to keep context (http request or transaction) => use implicits parameters
 - long methods => keep them short and pure. Their name is a small piece of documentation
 - mutable state
     - prefer a var instead of a mutable val
-    - update it from a single place (or the les possible)
+    - update it from a single place (or the less possible)
 - impure operations: Instant.now() or Random, take theses values as parameter, it will be easier to test
 - misleading type alias (`type ProcessResult = Unit`)
 - abuse of default case, non exhaustive match
