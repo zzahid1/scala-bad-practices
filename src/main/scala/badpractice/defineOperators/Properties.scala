@@ -17,7 +17,7 @@ object Property {
   def apply[A](name: String, wrapper: Wrapper[A]): Property[A] =
     new Property[A](Name(name), wrapper)
 
-  case class Name(value: String) extends AnyVal
+  case class Name(value: String)
 
   sealed trait Wrapper[A] {
     def encode(value: A): Value

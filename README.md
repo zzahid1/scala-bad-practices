@@ -25,6 +25,8 @@ This project references bad practices in Scala, some a language specific and som
 ## Design
 
 - use a mutable API: if you can avoid mutability, if you must, do it locally but never rely on mutability in your API
+- when designing API, forcing consumers to inherit from classes instead of exposing static methods (should be the last resort)
+- prefer type classes over inheritance to encourage separation of data type and behavior (Orient Mapper example)
 
 ## WTF
 
@@ -32,9 +34,12 @@ This project references bad practices in Scala, some a language specific and som
 
 ## Conclusion
 
-Bad practices comes in group, so, unlike the previous example, you may find a very tasty combinaison of them in your codebase, which make things fun ^^
+Bad practices comes in group, so, unlike the previous example, you may find a very tasty combination of them in your codebase, which make things fun ^^
 
 
 "best practices"
-- least power
+- least power => Use implicit class when an extension is needed and do not use implicit conversion
+( Why : Implicit conversions are applied in two situations: If an expression e is of type S, 
+and S does not conform to the expression’s expected type T. 
+[Or:] In a selection e.m with e of type S, if the selector m does not denote a member of S.)
 - explicit instead of implicit
