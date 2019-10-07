@@ -21,6 +21,7 @@ This project references bad practices in Scala, some a language specific and som
 - abuse of default case, non exhaustive match
 - function: return Try but throw anyway
 - primitive obsession
+- avoid explicit type annotations to implicits (see bug https://github.com/scala/bug/issues/8697)
 
 ## Design
 
@@ -42,4 +43,5 @@ Bad practices comes in group, so, unlike the previous example, you may find a ve
 ( Why : Implicit conversions are applied in two situations: If an expression e is of type S, 
 and S does not conform to the expression’s expected type T. 
 [Or:] In a selection e.m with e of type S, if the selector m does not denote a member of S.)
+- In general avoid implicit conversion. If used make sure that you are not dealing with a non-total conversion => risk of runtime exceptions.
 - explicit instead of implicit
