@@ -24,7 +24,7 @@ object LeastPower extends App {
   println(Edge().show)
   println(Vertex().show)
 
-  println(Edge().print())
+  /* println(Edge().print())
   println(Vertex().print())
 
   implicit case class EnrichEdge(value: Edge) extends AnyVal {
@@ -33,7 +33,7 @@ object LeastPower extends App {
 
   implicit case class EnrichVertex(value: Vertex) extends AnyVal {
     def print() = "Im a rich Vertex too"
-  }
+  } */
 
 
   def createVertex(): RichVertex =

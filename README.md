@@ -3,6 +3,24 @@
 Project to prepare a scala.io talk.
 This project references bad practices in Scala, some a language specific and some more general.
 
+## Summary of the talk
+
+- presentation
+- consensual bad practices
+    - null
+    - throw
+    - mutate function params
+    - use Any or AnyRef
+- generic bad practices
+    - optional overuse, too much default value (`optionalOveruse` package)
+    - impure calls (Instant.now() or Random.next()), can be replace by a parameter
+- ugliest code
+    - threadlocal, doesn't work well with async (thread pool)
+    - return Try & throw at the same time
+    - get or create transaction
+    - define common operators (`defineOperators` package)
+    - implicits in package objects
+
 ## Language syntax & features
 
 - implicits in package objects
@@ -13,6 +31,8 @@ This project references bad practices in Scala, some a language specific and som
 - apply method that return an other type than it's object
 - threadlocal to keep context (http request or transaction) => use implicits parameters
 - long methods => keep them short and pure. Their name is a small piece of documentation
+- in transactional context: get current transaction or create one => you never know when you finish the transaction
+- optional overuse (id: Option[String] or id: String with special value)
 - mutable state
     - prefer a var instead of a mutable val
     - update it from a single place (or the less possible)
