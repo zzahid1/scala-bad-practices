@@ -13,3 +13,19 @@ object Syntax {
   }
 
 }
+
+object test extends App {
+
+  trait Foo[_]
+
+  class Bar
+
+  implicitly[Foo[Bar]]
+
+  object Bar {
+    //should add type annotation to work
+    implicit val impFoo = new Foo[Bar] {
+    }
+  }
+
+}
