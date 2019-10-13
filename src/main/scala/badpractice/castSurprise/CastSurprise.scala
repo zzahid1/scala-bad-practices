@@ -10,7 +10,7 @@ object CastSurprise {
     println()
 
     val v: Int = res.getProperty[Int]("int") // nominal case
-    val m: Int = res.getProperty[Int]("bad") // wrong name => null, ok
+    val m: Int = res.getProperty[Int]("bad") // wrong name => null, ok // TODO 0!!!
     val s: Try[String] = Try(res.getProperty[String]("int")) // wrong type => ClassCastException, ok
     println(s"""    res.getProperty[ Int  ]("int")  : $v""")
     println(s"""    res.getProperty[ Int  ]("bad")  : $m""")
@@ -21,20 +21,20 @@ object CastSurprise {
 
     val vo: Option[Int] = Option(res.getProperty[Int]("int")) // nominal case with Option => Some(1), ok
     val mo: Option[Int] = Option(res.getProperty[Int]("bad")) // wrong name with Option => None, ok
-    val so: Try[Option[String]] = Try(Option(res.getProperty[String]("int"))) // wrong type with Option => Success(Some(1)), LOL, WAT???
-    println(s"""    Option(res.getProperty[ Int  ]("int")) : $vo""")
-    println(s"""    Option(res.getProperty[ Int  ]("bad")) : $mo""")
-    println(s"""Try(Option(res.getProperty[String]("int"))): $so""")
+    val so: Option[String] = Option(res.getProperty[String]("int")) // wrong type with Option => Some(1), LOL, WAT???
+    println(s"""Option(res.getProperty[ Int  ]("int")): $vo""")
+    println(s"""Option(res.getProperty[ Int  ]("bad")): $mo""")
+    println(s"""Option(res.getProperty[String]("int")): $so""")
     println()
 
     // let's use our IntString ^^
 
-    val is = Try(so.get.get)
-    val clazz = Try(so.get.get.getClass)
-    val modified = Try(so.get.get + "m")
-    println(s"""so.get.get           : ${so.get.get} vs $is""")
-    println(s"""so.get.get.getClass  : ${so.get.get.getClass} vs $clazz""")
-    println(s"""Try(so.get.get + "m"): ${Try(so.get.get + "m")} vs $modified""")
+    val is = Try(so.get)
+    val clazz = Try(so.get.getClass)
+    val modified = Try(so.get + "m")
+    println(s"""so.get           : ${so.get} vs $is""")
+    println(s"""so.get.getClass  : ${so.get.getClass} vs $clazz""")
+    println(s"""Try(so.get + "m"): ${Try(so.get + "m")} vs $modified""")
     println()
 
     // let's write a wrapper for that
