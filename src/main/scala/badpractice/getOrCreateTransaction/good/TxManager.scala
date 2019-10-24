@@ -5,15 +5,12 @@ import badpractice.getOrCreateTransaction.shared.Tx
 import scala.util.{Failure, Success, Try}
 
 class TxManager {
-  def transactionally[A](block: Tx => Try[A]): Try[A] = {
+  def begin[A](block: Tx => Try[A]): Try[A] = {
     val tx = new Tx()
     try {
-      val result = block(tx) // execute code here
-      result match {
-        case Success(_) => tx.commit()
-        case Failure(_) => tx.rollback()
-      }
-      result
+      val res = block(tx) // execute code
+      res.fold(_ => tx.rollback(), _ => tx.commit())
+      res
     } catch {
       case e: Throwable =>
         tx.rollback()

@@ -2,22 +2,19 @@ package badpractice.getOrCreateTransaction.bad
 
 import badpractice.getOrCreateTransaction.shared.Tx
 
-import scala.util.{Failure, Success, Try}
+import scala.util.{Failure, Try}
 
 class TxManager {
   private val currentTx = new ThreadLocal[Tx]()
 
-  def transactionally[A](block: => Try[A]): Try[A] = {
+  def begin[A](block: => Try[A]): Try[A] = {
     if (currentTx.get() == null) {
       val tx = new Tx()
       try {
         currentTx.set(tx)
-        val result = block // execute code here
-        result match {
-          case Success(_) => tx.commit()
-          case Failure(_) => tx.rollback()
-        }
-        result
+        val res = block // execute code
+        res.fold(_ => tx.rollback(), _ => tx.commit())
+        res
       } catch {
         case e: Throwable =>
           tx.rollback()
@@ -27,7 +24,7 @@ class TxManager {
         currentTx.remove()
       }
     } else {
-      block // already inside transaction, execute code
+      block // in transaction, execute code
     }
   }
 }
