@@ -2,18 +2,18 @@ package badpractice.getOrCreateTransaction.good
 
 import badpractice.getOrCreateTransaction.shared.Tx
 
-import scala.util.{Failure, Success, Try}
+import scala.util.{Failure, Try}
 
 class TxManager {
-  def begin[A](block: Tx => Try[A]): Try[A] = {
+  def begin[A](f: Tx => Try[A]): Try[A] = {
     val tx = new Tx()
     try {
-      val res = block(tx) // execute code
-      res.fold(_ => tx.rollback(), _ => tx.commit())
+      val res = f(tx) // execute code
+      res.fold(_ => tx.ko, _ => tx.ok)
       res
     } catch {
       case e: Throwable =>
-        tx.rollback()
+        tx.ko
         Failure(e)
     } finally {
       tx.close()

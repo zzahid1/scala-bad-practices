@@ -15,9 +15,9 @@ object Main {
     val userSrv = new UserSrv(userRepo, userIndexer, txMgr)
     val userMgt = new UserManagement(userSrv, statRepo, txMgr)
 
-    userSrv.saveUser(User(1, "Loïc"))
+    userSrv.save(User(1, "Loïc"))
 
-    userMgt.saveUser(User(1, "Loïc"))
+    userMgt.save(User(1, "Loïc"))
 
   }
 
@@ -30,9 +30,9 @@ object Main {
     val userSrv = new UserSrv(userRepo, userIndexer, txMgr)
     val userMgt = new UserManagement(userSrv, statRepo, txMgr)
 
-    userSrv.saveUser(User(1, "Loïc"))
+    userSrv.save(User(1, "Loïc"))
 
-    userMgt.saveUser(User(1, "Loïc"))
+    userMgt.save(User(1, "Loïc"))
 
   }
 }

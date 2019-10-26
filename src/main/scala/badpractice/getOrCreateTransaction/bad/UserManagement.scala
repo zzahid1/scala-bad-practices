@@ -7,10 +7,10 @@ import scala.util.Try
 class UserManagement(userSrv: UserSrv,
                      statRepo: StatRepo,
                      txMgr: TxManager) {
-  def saveUser(u: User): Try[Unit] =
+  def save(u: User): Try[Unit] =
     txMgr.begin {
       for {
-        _ <- userSrv.saveUser(u)
+        _ <- userSrv.save(u)
         _ <- statRepo.userSaved()
       } yield ()
     }

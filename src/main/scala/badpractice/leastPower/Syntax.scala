@@ -24,7 +24,7 @@ object test extends App {
 
   object Bar {
     //should add type annotation to work
-    implicit val impFoo = new Foo[Bar] {
+    implicit val impFoo: Foo[Bar] = new Foo[Bar] {
     }
   }
 

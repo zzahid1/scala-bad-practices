@@ -7,9 +7,9 @@ import scala.util.Try
 class UserSrv(userRepo: UserRepo,
               userIndexer: UserIndexer,
               txMgr: TxManager) {
-  def saveUser(u: User): Try[Unit] = for {
+  def save(u: User): Try[Unit] = for {
     _ <- txMgr.begin { implicit tx =>
-      userRepo.saveUser(u)
+      userRepo.save(u)
     }
     // should be after the transaction
     _ <- userIndexer.index(u)

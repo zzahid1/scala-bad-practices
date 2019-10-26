@@ -1,13 +1,16 @@
 package badpractice.defineOperators
 
+import badpractice.defineOperators.Prop.{IntWrap, StrWrap}
+
 object Main {
   def main(args: Array[String]): Unit = {
-    val name = Property("name", Property.StringWrapper)
-    val score = Property("score", Property.IntWrapper)
+    val name: Prop[String] = Prop("name", StrWrap)
+    val score: Prop[Int] = Prop("score", IntWrap)
 
-    val properties = Properties(
+    val props = Props(
       name -> "Jean",
-      score -> 10
-    )
+      score -> 10)
+
+    props.in
   }
 }

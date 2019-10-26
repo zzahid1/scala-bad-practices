@@ -7,24 +7,24 @@ import scala.util.{Failure, Try}
 class TxManager {
   private val currentTx = new ThreadLocal[Tx]()
 
-  def begin[A](block: => Try[A]): Try[A] = {
+  def begin[A](f: => Try[A]): Try[A] = {
     if (currentTx.get() == null) {
       val tx = new Tx()
       try {
         currentTx.set(tx)
-        val res = block // execute code
-        res.fold(_ => tx.rollback(), _ => tx.commit())
+        val res = f // execute code
+        res.fold(_ => tx.ko, _ => tx.ok)
         res
       } catch {
         case e: Throwable =>
-          tx.rollback()
+          tx.ko
           Failure(e)
       } finally {
         tx.close()
         currentTx.remove()
       }
     } else {
-      block // in transaction, execute code
+      f // in transaction, execute code
     }
   }
 }

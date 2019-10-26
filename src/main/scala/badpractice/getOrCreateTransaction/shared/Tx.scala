@@ -1,9 +1,9 @@
 package badpractice.getOrCreateTransaction.shared
 
 class Tx {
-  def commit(): Unit = ()
+  def ok: Unit = ()
 
-  def rollback(): Unit = ()
+  def ko: Unit = ()
 
   def close(): Unit = ()
 }
