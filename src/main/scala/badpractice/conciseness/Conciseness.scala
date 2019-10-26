@@ -1,4 +1,4 @@
-package badpractice.patternMatchingLover.conciseness
+package badpractice.conciseness
 
 object Conciseness {
 
