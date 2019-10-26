@@ -22,12 +22,11 @@ object PatternMatchingLover {
     }
   }
 
-  def method2() = {
+  def betterMethod(): Try[Option[User]] = {
     for {
       x <- Try(toString)
     } yield (for {
-      user <- UserRepo.findBy(x)
-        .flatMap(UserRepo.update).orElse(UserRepo.create(x))
+      user <- UserRepo.findBy(x).fold(UserRepo.create(x))((u) => UserRepo.update(u))
     } yield user)
   }
 
