@@ -13,28 +13,15 @@ object LeastPower extends App {
 
   case class RichNode() {
 
-    def show = "Im a Rich Node"
+    def show: String = "Im a Rich Node"
   }
 
-  implicit def RichEdge(edge: Arc): RichArc = RichArc()
+  implicit def RichArc(arc: Arc): RichArc = RichArc()
 
-  implicit def RichVertex(vertex: Node): RichNode = RichNode()
+  implicit def RichNode(node: Node): RichNode = RichNode()
 
-  def createVertex(): RichNode = {
+  def createRichNode(): RichNode = {
     // could be a mismatch error return
     Node()
   }
-
-
-  println(Arc().show)
-  println(Node().show)
-
-
-  import Syntax._
-
-  val node = RichNode("42")
-
-  println(Arc().show())
-//  println(Node().print())
-
 }

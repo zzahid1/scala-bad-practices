@@ -27,7 +27,7 @@ object PatternMatchingLover {
       x <- Try(toString)
     } yield (for {
       user <- UserRepo.findBy(x)
-        .flatMap(UserRepo.update(_)).orElse(UserRepo.create(x))
+        .flatMap(UserRepo.update).orElse(UserRepo.create(x))
     } yield user)
   }
 
@@ -41,5 +41,6 @@ object PatternMatchingLover {
     def create(id: String): Option[User] = ???
 
   }
+
 
 }
