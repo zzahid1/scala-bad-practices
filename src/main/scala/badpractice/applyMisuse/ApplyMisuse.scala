@@ -1,6 +1,6 @@
-package badpractice.leastPower
+package badpractice.applyMisuse
 
-import badpractice.leastPower.ApplyMisuse.Node
+import badpractice.applyMisuse.ApplyMisuse.Node
 
 import scala.util.Try
 
