@@ -13,7 +13,7 @@
     => bad: define "->" on Property def
     => bad: naming of Property for definition and id/value
     => bad: any parameter / non exhaustive match (ex: PropertyValue(a: Any): PropertyValue with correct implementation)
-    => bad: apply that return an other type: Property.appy(name, value): (id, value)
+    => bad: apply that return an other type: Property.apply(name, value): (id, value)
 - spec: use article in different context
     => too many Optional fields, default values and specific values
 

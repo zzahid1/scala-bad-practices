@@ -3,37 +3,38 @@ package badpractice.leastPower
 object LeastPower extends App {
 
 
-  final case class Edge()
+  final case class Arc()
 
-  final case class Vertex()
+  final case class Node()
 
-  case class RichEdge() {
-    def show = "Im a Rich Edge"
+  case class RichArc() {
+    def show = "Im a Rich Arc"
   }
 
-  case class RichVertex() {
-    def show = "Im a Rich Vertex"
+  case class RichNode() {
+
+    def show = "Im a Rich Node"
+  }
+
+  implicit def RichEdge(edge: Arc): RichArc = RichArc()
+
+  implicit def RichVertex(vertex: Node): RichNode = RichNode()
+
+  def createVertex(): RichNode = {
+    // could be a mismatch error return
+    Node()
   }
 
 
-  implicit def RichEdge(edge: Edge): RichEdge = RichEdge()
-
-  implicit def RichVertex(vertex: Vertex): RichVertex = RichVertex()
-
-
-  println(Edge().show)
-  println(Vertex().show)
+  println(Arc().show)
+  println(Node().show)
 
 
   import Syntax._
 
-  println(Edge().print())
-  println(Vertex().print())
+  val node = RichNode("42")
 
-
-  def createVertex(): RichVertex = {
-    // could be a mismatch error return
-    Vertex()
-  }
+  println(Arc().show())
+//  println(Node().print())
 
 }

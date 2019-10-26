@@ -1,15 +1,15 @@
 package badpractice.leastPower
 
-import badpractice.leastPower.LeastPower.{Edge, Vertex}
+import badpractice.leastPower.LeastPower.{Arc, Node}
 
 object Syntax {
 
-  implicit class EnrichEdge(val value: Edge) extends AnyVal {
-    def print() = "Im a rich Edge too"
+  implicit class EnrichEdge(val value: Arc) extends AnyVal {
+    def show() = "Im a rich Edge too"
   }
 
-  implicit class EnrichVertex(val value: Vertex) extends AnyVal {
-    def print() = "Im a rich Vertex too"
+  implicit class EnrichVertex(val value: Node) extends AnyVal {
+    def show() = "Im a rich Vertex too"
   }
 
 }
